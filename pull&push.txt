@@ -1,0 +1,5 @@
+git config --global https.sslVerify "false"
+git pull origin main
+
+git config --global --unset https.proxy
+git push origin main
