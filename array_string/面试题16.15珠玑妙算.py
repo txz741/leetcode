@@ -1,3 +1,4 @@
+from typing import List
 class Solution:
     def masterMind(self, solution: str, guess: str) -> List[int]:
         res = [0, 0]
