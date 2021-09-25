@@ -1,33 +1,25 @@
 import collections
 from typing import List
+
+
 class Solution:
-    def shortestCompletingWord(self, licensePlate: str,
-                               words: List[str]) -> str:
-        hashmap1 = dict()
-        for x in licensePlate:
-            if x.isalpha():
-                x = x.lower()
-                if x in hashmap1:
-                    hashmap1[x] += 1
-                else:
-                    hashmap1[x] = 1
-
-        res = max(words, key=len) + 'a'
-
-        for word in words:
-            flag = 0
-            hashmap2 = collections.Counter(word)
-            for x in hashmap1:
-                if x not in hashmap2 or hashmap2[x] < hashmap1[x]:
-                    flag = 1
-                    break
-            if flag == 0 and len(word) < len(res):
-                res = word
+    def findShortestSubArray(self, nums: List[int]) -> int:
+        length = len(nums) - 1
+        hashmap = collections.Counter(nums)
+        deg = hashmap[max(hashmap, key=hashmap.get)]
+        res = float('inf')
+        for i, n in enumerate(nums):
+            if n in hashmap and hashmap[n] == deg:
+                j = length
+                while nums[j] != n:
+                    j -= 1
+                if j >= i:
+                    res = min(res, j - i + 1)
+                hashmap.pop(n)
 
         return res
 
 
 SS = Solution()
-a, b = "iLMOl80", ["send", "why", "want", "program", "million", "wonder", "manager", "success", "likely", "them"]
-res = SS.shortestCompletingWord(a, b)
+res = SS.findShortestSubArray([1,2,2,3,1,4,2])
 print(res)
