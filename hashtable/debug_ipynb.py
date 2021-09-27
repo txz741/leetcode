@@ -3,23 +3,24 @@ from typing import List
 
 
 class Solution:
-    def findShortestSubArray(self, nums: List[int]) -> int:
-        length = len(nums) - 1
-        hashmap = collections.Counter(nums)
-        deg = hashmap[max(hashmap, key=hashmap.get)]
-        res = float('inf')
-        for i, n in enumerate(nums):
-            if n in hashmap and hashmap[n] == deg:
-                j = length
-                while nums[j] != n:
-                    j -= 1
-                if j >= i:
-                    res = min(res, j - i + 1)
-                hashmap.pop(n)
-
-        return res
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+        mylist = []
+        i, length = 0, len(paragraph)
+        while i < length:
+            if paragraph[i].isalpha():
+                if mylist:
+                    mylist[-1] += paragraph[i].lower()
+                else:
+                    mylist.append(paragraph[i].lower())
+            else:
+                while i < length and not paragraph[i].isalpha():
+                    i += 1
+                if i < length:
+                    mylist.append(paragraph[i].lower())
+            i += 1
+        return mylist
 
 
 SS = Solution()
-res = SS.findShortestSubArray([1,2,2,3,1,4,2])
+res = SS.mostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.", 'a')
 print(res)
