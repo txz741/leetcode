@@ -29,5 +29,5 @@ if __name__=='__main__':
     res = pd.concat(record_list, axis=0, ignore_index=True)
     print(res)
     # time.sleep(3)
-    df = pd.DataFrame(res, columns= col_list)
+    df = pd.DataFrame(res, columns=col_list)
     df.to_excel('summary_record.xlsx')
