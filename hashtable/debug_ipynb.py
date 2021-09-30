@@ -3,24 +3,22 @@ from typing import List
 
 
 class Solution:
-    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
-        mylist = []
-        i, length = 0, len(paragraph)
-        while i < length:
-            if paragraph[i].isalpha():
-                if mylist:
-                    mylist[-1] += paragraph[i].lower()
-                else:
-                    mylist.append(paragraph[i].lower())
+    def findJudge(self, n: int, trust: List[List[int]]) -> int:
+        left, hashmap = set(), dict()
+        # res = -1
+        for pair in trust:
+            left.add(pair[0])
+            if pair[1] not in hashmap:
+                hashmap[pair[1]] = 1
             else:
-                while i < length and not paragraph[i].isalpha():
-                    i += 1
-                if i < length:
-                    mylist.append(paragraph[i].lower())
-            i += 1
-        return mylist
+                hashmap[pair[1]] += 1
+
+        for x in hashmap:
+            if hashmap[x] == n - 1 and x not in left:
+                return x
+        return -1
 
 
 SS = Solution()
-res = SS.mostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.", 'a')
+res = SS.findJudge(1,[])
 print(res)
