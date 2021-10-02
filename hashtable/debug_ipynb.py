@@ -3,26 +3,17 @@ from typing import List
 
 
 class Solution:
-    def isPathCrossing(self, path: str) -> bool:
-        x, y = 0, 0
-        hashmap = set()
-        hashmap.add('0_0')
-        for p in path:
-            if p == 'N':
-                y += 1
-            elif p == 'S':
-                y -= 1
-            elif p == 'W':
-                x -= 1
-            elif p == 'E':
-                x += 1
-            temp = str(x) + '_' + str(y)
-            if temp in hashmap:
-                return True
-            hashmap.add(temp)
-        return False
+    def fairCandySwap(self, aliceSizes: List[int], bobSizes: List[int]) -> List[int]:
+        diff = sum(aliceSizes) - (sum(aliceSizes) + sum(bobSizes)) / 2
+        aliceSizes = set(aliceSizes)
+        bobSizes = set(bobSizes)
+        # res = []
+        for a in aliceSizes:
+            if a - diff in bobSizes:
+                return [a, a - diff]
+
 
 
 SS = Solution()
-res = SS.isPathCrossing('NESWW')
+res = SS.fairCandySwap([1, 1], [2, 2])
 print(res)
