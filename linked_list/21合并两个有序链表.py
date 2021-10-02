@@ -34,7 +34,7 @@ class Solution:
         res.next = l1 if l1 else l2
         return prehead.next
 
-list1, list2 = [1, 2, 4, 8, 20], [1, 3, 4, 7, 9, 11]
+list1, list2 = [1, 3, 5, 7, 9], [2, 4, 6, 8, 10]
 l1, l2 = SingleLinkList(), SingleLinkList()
 for n in list1:
     l1.append(n)
